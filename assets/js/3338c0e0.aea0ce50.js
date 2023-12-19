@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktwinkle_docs=self.webpackChunktwinkle_docs||[]).push([[5791],{3592:e=>{e.exports=JSON.parse('{"label":"frontend","permalink":"/docs/tags/frontend","allTagsPath":"/docs/tags","count":1,"items":[{"id":"Prettier","title":"Prettier","description":"\u914d\u7f6e","permalink":"/docs/Prettier"}],"unlisted":false}')}}]);
