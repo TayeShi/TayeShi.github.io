@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>My Site Blog</title>
+        <link>https://tayeshi.github.io/blog</link>
+        <description>My Site Blog</description>
+        <lastBuildDate>Fri, 15 Dec 2023 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[为什么post会发送两次]]></title>
+            <link>https://tayeshi.github.io/blog/为什么post会发送两次</link>
+            <guid>https://tayeshi.github.io/blog/为什么post会发送两次</guid>
+            <pubDate>Fri, 15 Dec 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[最近公众号和掘金上都经常看见推送 “为什么post发送两次请求?”]]></description>
+            <content:encoded><![CDATA[<p>最近公众号和掘金上都经常看见推送 <strong>“为什么post发送两次请求?”</strong></p>
+<p>这不就是预检么？</p>
+<p>先看具体表现</p>
+<p><img loading="lazy" alt="两次" src="https://tayeshi.github.io/assets/images/1-777cb0bc77d8fea3d827f3693004c237.png" width="485" height="77" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://tayeshi.github.io/assets/images/2-6604b35f739f9f74d597a41f6dd0bed8.png" width="588" height="168" class="img_ev3q"></p>
+<p><strong>省流一句话：当出现跨域且为非简单请求，就会出现Preflight，也就是两次请求。</strong></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="什么是跨域">什么是跨域<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F" class="hash-link" aria-label="Direct link to 什么是跨域" title="Direct link to 什么是跨域">​</a></h2>
+<p>跨域：跨源资源共享（CORS）策略</p>
+<p>当页面请求资源时，出现：<strong>协议</strong>、<strong>域名</strong>、<strong>端口</strong> 任意一个不一样，就会出现<strong>跨域</strong>。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="为什么有跨域这个问题">为什么有跨域这个问题<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%B7%A8%E5%9F%9F%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98" class="hash-link" aria-label="Direct link to 为什么有跨域这个问题" title="Direct link to 为什么有跨域这个问题">​</a></h3>
+<p>跨域问题主要是出于安全考虑。为防止恶意网站读取或修改另一个网站的数据，现代 Web 浏览器实施了<strong>同源策略（Same-Origin Policy）</strong>。这项策略默认阻止网页向不同源的服务器发起读取请求。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="出现跨域问题如何解决">出现跨域问题如何解决<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E5%87%BA%E7%8E%B0%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3" class="hash-link" aria-label="Direct link to 出现跨域问题如何解决" title="Direct link to 出现跨域问题如何解决">​</a></h3>
+<p>一般解决如下：</p>
+<ul>
+<li>
+<p>CORS（Cross-Origin Resource Sharing）：最常用的解决方案。服务器设置特定的 HTTP 头部，如 Access-Control-Allow-Origin，来允许特定的外部域访问其资源。</p>
+</li>
+<li>
+<p>JSONP（JSON with Padding）：较老的技术，利用 <code>&lt;script&gt;</code> 标签不受同源策略限制的特点来绕过跨域限制。但只能用于 GET 请求。</p>
+</li>
+<li>
+<p>代理服务器：通过在同源的服务器上设置代理，将请求转发到其他域的服务器上。</p>
+</li>
+<li>
+<p>文档域设置（document.domain）：仅适用于二级域名相同而子域名不同的情况，通过设置 document.domain 来允许相互访问。</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="什么是简单请求什么是非简单请求">什么是简单请求、什么是非简单请求<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82" class="hash-link" aria-label="Direct link to 什么是简单请求、什么是非简单请求" title="Direct link to 什么是简单请求、什么是非简单请求">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="简单请求">简单请求<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82" class="hash-link" aria-label="Direct link to 简单请求" title="Direct link to 简��单请求">​</a></h3>
+<p>同时满足以下条件：</p>
+<ul>
+<li>
+<p>请求方法：使用以下方法之一：</p>
+<ul>
+<li><code>GET</code></li>
+<li><code>HEAD</code></li>
+<li><code>POST</code></li>
+</ul>
+</li>
+<li>
+<p>HTTP 头部：除了浏览器自动设置的头部（如 <code>User-Agent</code>, <code>Content-Language</code> 等）和在 CORS 安全清单中的头部（如 <code>Accept</code>, <code>Content-Type</code>, <code>Content-Language</code>, <code>Last-Event-ID</code>），没有使用其他头部。特别地，<code>Content-Type</code> 必须是以下之一：</p>
+<ul>
+<li><code>text/plain</code></li>
+<li><code>multipart/form-data</code></li>
+<li><code>application/x-www-form-urlencoded</code></li>
+</ul>
+</li>
+<li>
+<p>无事件监听器：请求没有使用事件监听器注册事件。</p>
+</li>
+<li>
+<p>无可读流对象：请求没有使用 <code>ReadableStream</code> 对象。</p>
+</li>
+<li>
+<p>无 <code>XMLHttpRequestUpload</code> 对象：请求没有使用 <code>XMLHttpRequestUpload</code> 对象，或者有，但未注册任何事件监听器。</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="非简单请求">非简单请求<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82" class="hash-link" aria-label="Direct link to 非简单请求" title="Direct link to 非简单请求">​</a></h3>
+<p>不是简单请求当然就是非简单请求了，通常如下：</p>
+<ul>
+<li>使用了 <code>PUT</code>、<code>DELETE</code>、<code>CONNECT</code>、<code>OPTIONS</code>、<code>TRACE</code>、<code>PATCH</code> 等 HTTP 方法。
+发送了除简单请求所允许之外的 HTTP 头部。</li>
+<li><code>Content-Type</code> 是 <code>application/json</code>、<code>text/xml</code> 或其他非简单请求类型。
+在 <code>XMLHttpRequest</code> 中注册了事件监听器。</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="什么是preflight-请求">什么是Preflight 请求？<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#%E4%BB%80%E4%B9%88%E6%98%AFpreflight-%E8%AF%B7%E6%B1%82" class="hash-link" aria-label="Direct link to 什么是Preflight 请求？" title="Direct link to 什么是Preflight 请求？">​</a></h2>
+<p>Preflight 请求是一种自动发起的 HTTP OPTIONS 请求，它发生在实际的跨源请求之前。浏览器使用它来确定实际请求是否安全且被服务器允许。这主要用于含有某些特定特征的请求，比如：</p>
+<ul>
+<li>使用除 <code>GET</code>、<code>HEAD</code> 或 <code>POST</code> 以外的 HTTP 方法。</li>
+<li><code>POST</code> 请求的 <code>Content-Type</code> 不是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code>。</li>
+<li>请求中包含自定义的 headers。</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="preflight请求的处理">Preflight请求的处理<a href="https://tayeshi.github.io/blog/%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%9A%E5%8F%91%E9%80%81%E4%B8%A4%E6%AC%A1#preflight%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86" class="hash-link" aria-label="Direct link to Preflight请求的处理" title="Direct link to Preflight请求的处理">​</a></h2>
+<ul>
+<li>
+<p>自动发送：当满足上述条件时，浏览器会自动发起一个 OPTIONS 请求到服务器。</p>
+</li>
+<li>
+<p>服务器响应：服务器需要正确响应这个 OPTIONS 请求，声明哪些源、哪些 HTTP 方法和头部是被允许的。</p>
+</li>
+<li>
+<p>实际请求：只有当 preflight 响应表明实际请求是被允许的，浏览器才会发送实际的请求。</p>
+</li>
+</ul>]]></content:encoded>
+            <category>frontend</category>
+        </item>
+        <item>
+            <title><![CDATA[Welcome]]></title>
+            <link>https://tayeshi.github.io/blog/welcome</link>
+            <guid>https://tayeshi.github.io/blog/welcome</guid>
+            <pubDate>Thu, 26 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Docusaurus blogging features are powered by the blog plugin.]]></description>
+            <content:encoded><![CDATA[<p><a href="https://docusaurus.io/docs/blog" target="_blank" rel="noopener noreferrer">Docusaurus blogging features</a> are powered by the <a href="https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog" target="_blank" rel="noopener noreferrer">blog plugin</a>.</p>
+<p>Simply add Markdown files (or folders) to the <code>blog</code> directory.</p>
+<p>Regular blog authors can be added to <code>authors.yml</code>.</p>
+<p>The blog post date can be extracted from filenames, such as:</p>
+<ul>
+<li><code>2019-05-30-welcome.md</code></li>
+<li><code>2019-05-30-welcome/index.md</code></li>
+</ul>
+<p>A blog post folder can be convenient to co-locate blog post images:</p>
+<p><img loading="lazy" alt="Docusaurus Plushie" src="https://tayeshi.github.io/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p>
+<p>The blog supports tags as well!</p>
+<p><strong>And if you don't want a blog</strong>: just delete this directory, and use <code>blog: false</code> in your Docusaurus config.</p>]]></content:encoded>
+            <category>facebook</category>
+            <category>hello</category>
+            <category>docusaurus</category>
+        </item>
+        <item>
+            <title><![CDATA[MDX Blog Post]]></title>
+            <link>https://tayeshi.github.io/blog/mdx-blog-post</link>
+            <guid>https://tayeshi.github.io/blog/mdx-blog-post</guid>
+            <pubDate>Sun, 01 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Blog posts support Docusaurus Markdown features, such as MDX.]]></description>
+            <content:encoded><![CDATA[<p>Blog posts support <a href="https://docusaurus.io/docs/markdown-features" target="_blank" rel="noopener noreferrer">Docusaurus Markdown features</a>, such as <a href="https://mdxjs.com/" target="_blank" rel="noopener noreferrer">MDX</a>.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Use the power of React to create interactive blog posts.</p><div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">button onClick</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token arrow operator" style="color:#393A34">=&gt;</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">alert</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'button clicked!'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">}</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token maybe-class-name">Click</span><span class="token plain"> me</span><span class="token operator" style="color:#393A34">!</span><span class="token operator" style="color:#393A34">&lt;</span><span class="token operator" style="color:#393A34">/</span><span class="token plain">button</span><span class="token operator" style="color:#393A34">&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div><button>Click me!</button></div></div>]]></content:encoded>
+            <category>docusaurus</category>
+        </item>
+        <item>
+            <title><![CDATA[Long Blog Post]]></title>
+            <link>https://tayeshi.github.io/blog/long-blog-post</link>
+            <guid>https://tayeshi.github.io/blog/long-blog-post</guid>
+            <pubDate>Wed, 29 May 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[This is the summary of a very long blog post,]]></description>
+            <content:encoded><![CDATA[<p>This is the summary of a very long blog post,</p>
+<p>Use a <code>&lt;!--</code> <code>truncate</code> <code>--&gt;</code> comment to limit blog post size in the list view.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
+            <category>hello</category>
+            <category>docusaurus</category>
+        </item>
+        <item>
+            <title><![CDATA[First Blog Post]]></title>
+            <link>https://tayeshi.github.io/blog/first-blog-post</link>
+            <guid>https://tayeshi.github.io/blog/first-blog-post</guid>
+            <pubDate>Tue, 28 May 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></description>
+            <content:encoded><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
+            <category>hola</category>
+            <category>docusaurus</category>
+        </item>
+    </channel>
+</rss>
