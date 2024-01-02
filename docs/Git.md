@@ -2,13 +2,13 @@
 
 ## Conventional Commits规范
 
-Conventional Commits是一种为Git提交消息提供标准化结构的规范，旨在使这些提交消息更易于阅读和自动处理。这种格式的使用有助于自动化版本控制、生成更有意义的发布日志，并能更好地管理和维护大型项目。
+**Conventional Commits**是一种为Git提交消息提供标准化结构的规范，旨在使这些提交消息更易于阅读和自动处理。这种格式的使用有助于自动化版本控制、生成更有意义的发布日志，并能更好地管理和维护大型项目。
 
 1. 基本结构
 
 提交消息通常遵循以下格式：
 
-```
+```scss
 <类型>[可选的作用域]: <描述>
 
 [可选的正文]
@@ -20,15 +20,15 @@ Conventional Commits是一种为Git提交消息提供标准化结构的规范，
 
 类型是提交消息的必要部分，用于说明提交的目的或影响。常见的类型包括：
 
-- feat：新增功能（feature）。
-- fix：修复bug。
-- docs：仅文档的更改。
-- style：不影响代码含义的更改（空格、格式化、缺少分号等）。
-- refactor：既不修复错误也不添加功能的代码更改。
-- perf：提高性能的代码更改。
-- test：添加或修正测试。
-- chore：对构建过程或辅助工具和库（如文档生成）的更改。
-- ci：对CI配置文件和脚本的更改。
+- `feat`：新增功能（feature）。
+- `fix`：修复bug。
+- `docs`：仅文档的更改。
+- `style`：不影响代码含义的更改（空格、格式化、缺少分号等）。
+- `refactor`：既不修复错误也不添加功能的代码更改。
+- `perf`：提高性能的代码更改。
+- `test`：添加或修正测试。
+- `chore`：对构建过程或辅助工具和库（如文档生成）的更改。
+- `ci`：对CI配置文件和脚本的更改。
 
 3. 作用域(Scope)（可选）
 
@@ -61,24 +61,24 @@ Closes #1234
 
 ### 注意事项
 
-Conventional Commits是一种社区驱动的最佳实践，但并非所有项目都需要严格遵守。
+**Conventional Commits**是一种社区驱动的最佳实践，但并非所有项目都需要严格遵守。
 
 项目团队可以根据自己的需要调整或扩展这些规则。
 
 
 ### 关于Emoji的使用约定
 
-在Conventional Commits规范中，使用emoji主要是为了给提交信息添加更直观的视觉元素和额外的语义层次。虽然Conventional Commits本身没有强制要求使用emoji，但在实践中，许多开发者和团队采用emoji来传达特定的意义，使提交信息更易于快速识别和理解。
+在**Conventional Commits**规范中，使用emoji主要是为了给提交信息添加更直观的视觉元素和额外的语义层次。虽然**Conventional Commits**本身没有强制要求使用emoji，但在实践中，许多开发者和团队采用emoji来传达特定的意义，使提交信息更易于快速识别和理解。
 
-- ✨ :sparkles:： 引入新功能（与feat类型相关）。
-- 🐛 :bug:： 修复bug（与fix类型相关）。
-- 📚 :books:： 文档相关的更改（与docs类型相关）。
-- 🎨 :art:： 改进代码结构/代码格式（与style类型相关）。
-- 🔨 :hammer:： 代码重构（与refactor类型相关）。
-- ⚡ :zap:： 提高性能的更改（与perf类型相关）。
-- ✅ :white_check_mark:： 添加测试（与test类型相关）。
-- 🔧 :wrench:： 修改配置文件（与chore或config类型相关）。
-- 🔀 :twisted_rightwards_arrows:： 合并分支（与分支操作相关）。
+- ✨ `:sparkles:`： 引入新功能（与feat类型相关）。
+- 🐛 `:bug:`： 修复bug（与fix类型相关）。
+- 📚 `:books:`： 文档相关的更改（与docs类型相关）。
+- 🎨 `:art:`： 改进代码结构/代码格式（与style类型相关）。
+- 🔨 `:hammer:`： 代码重构（与refactor类型相关）。
+- ⚡ `:zap:`： 提高性能的更改（与perf类型相关）。
+- ✅ `:white_check_mark:`： 添加测试（与test类型相关）。
+- 🔧 `:wrench:`： 修改配置文件（与chore或config类型相关）。
+- 🔀 `:twisted_rightwards_arrows:`： 合并分支（与分支操作相关）。
 
 #### 注意事项
 - 使用emoji应考虑其清晰度和跨文化的可理解性。不同的文化和个人对emoji的理解可能有所不同。
@@ -87,3 +87,7 @@ Conventional Commits是一种社区驱动的最佳实践，但并非所有项目
 
 总的来说，emoji在提交信息中的使用更多地是一个社区和团队文化的体现，而不是一个严格的规范要求。正确使用时，它们可以使提交历史更加生动和易于理解。
 
+### VSCode 中可使用的相关插件
+
+- *Conventional Commits*
+- *Git CZ Emoji*
