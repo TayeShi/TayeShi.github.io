@@ -1,6 +1,8 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const config: Config = {
   title: 'My Site',
@@ -34,10 +36,24 @@ const config: Config = {
   },
 
   presets: [
+    // // 数学公式支持
+    // [
+    //   '@docusaurus/preset-classic',
+    //   {
+    //     docs: {
+    //       path: 'docs',
+    //       remarkPlugins: [remarkMath],
+    //       rehypePlugins: [rehypeKatex],
+    //     },
+    //   },
+    // ],
     [
       'classic',
       {
         docs: {
+          // 数学公式支持
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -132,6 +148,16 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  // 数学公式支持额外引入的css
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
 };
 
 export default config;
