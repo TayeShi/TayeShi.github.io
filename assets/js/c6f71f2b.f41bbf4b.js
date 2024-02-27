@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktwinkle_docs=self.webpackChunktwinkle_docs||[]).push([[9068],{8278:e=>{e.exports=JSON.parse('{"label":"frontend","permalink":"/blog/tags/frontend","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);

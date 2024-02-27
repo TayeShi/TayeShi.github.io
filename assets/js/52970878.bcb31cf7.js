@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktwinkle_docs=self.webpackChunktwinkle_docs||[]).push([[7316],{4869:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/solution","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
