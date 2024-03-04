@@ -97,12 +97,12 @@ git fetch --prune
 
 这个命令会获取最新的远程仓库信息，并删除那些在远程仓库中已经被删除的分支的本地引用。
 
-git branch --merged master | grep -v "master" | xargs git branch -d
+`git branch --merged master | grep -v "master" | xargs git branch -d`
 
 ```shell
 git branch --merged master | grep -v "(^\*|master|main)" | xargs git branch -d
 ```
 
-- git branch --merged master：列出所有已经合并到 master 分支的本地分支。
-- grep -v "master"：确保 master 分支本身不会被列出。
-- xargs git branch -d：对列出的每一个分支，使用 git branch -d 命令来删除它们。
+- `git branch --merged master`：列出所有已经合并到 master 分支的本地分支。
+- `grep -v "master"`：确保 master 分支本身不会被列出。
+- `xargs git branch -d`：对列出的每一个分支，使用 git branch -d 命令来删除它们。
