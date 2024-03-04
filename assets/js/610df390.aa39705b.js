@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktwinkle_docs=self.webpackChunktwinkle_docs||[]).push([[2786],{5821:s=>{s.exports=JSON.parse('{"label":"day","permalink":"/blog/tags/day","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
