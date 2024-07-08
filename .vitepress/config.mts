@@ -1,3 +1,4 @@
+import VitePluginVitePressAutoSidebar from 'vite-plugin-vitepress-auto-sidebar'
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -8,6 +9,11 @@ export default defineConfig({
   srcDir: 'docs',
   /** site.com/xxx -> site.com/xxx.html,简洁url */
   cleanUrls: true,
+  vite: {
+    plugins: [
+      VitePluginVitePressAutoSidebar({})
+    ]
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -19,28 +25,28 @@ export default defineConfig({
 
     ],
 
-    sidebar: {
-      '/document/': [
-        {
-          text: 'Document',
-          base: '/document',
-          link: '/',
-          items: [
-            { text: 'Git', link: '/git' },
-          ]
-        }
-      ],
-      '/interview/': [
-        {
-          text: 'Interview',
-          base: '/interview',
-          link: '/',
-          items: [
-            { text: 'TCP粘包', link: '/TCP粘包' },
-          ]
-        }
-      ],
-    },
+    // sidebar: {
+    //   '/document/': [
+    //     {
+    //       text: 'Document',
+    //       base: '/document',
+    //       link: '/',
+    //       items: [
+    //         { text: 'Git', link: '/git' },
+    //       ]
+    //     }
+    //   ],
+    //   '/interview/': [
+    //     {
+    //       text: 'Interview',
+    //       base: '/interview',
+    //       link: '/',
+    //       items: [
+    //         { text: 'TCP粘包', link: '/TCP粘包' },
+    //       ]
+    //     }
+    //   ],
+    // },
     // sidebar: [
     //   {
     //     text: 'Examples',
