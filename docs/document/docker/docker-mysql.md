@@ -11,7 +11,7 @@ docker pull mysql:latest
 ### 启动镜像
 
 ```shell
-docker run -itd --name local-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run -itd --name local-mysql --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
 ```
 
 - `-p`: 指定容器端口映射到主机端口
@@ -22,3 +22,5 @@ docker run -itd --name local-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 my
 
 - `-v <宿主机文件夹路径，如：/**/mysql>:/var/lib/mysql`: 将宿主机上的目录`/**/mysql`映射到容器内的`/var/lib/mysql`目录。这样可以将数据持久化存储在宿主机上，避免容器重启或销毁时丢失数据。
 - `-d`: 这个标志表示容器应该以后台（守护进程）模式运行，不会阻塞终端。
+
+`docker run -itd --name local-mysql --restart=always -v /home/docker/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql`

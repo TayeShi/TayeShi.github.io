@@ -11,7 +11,7 @@ docker pull redis:latest
 ### 启动镜像
 
 ```shell
-docker run -itd --name local-redis -p 6379:6379 redis
+docker run -itd --name local-redis --restart=always -p 6379:6379 redis
 ```
 
 - `-p`: 指定容器端口映射到主机端口
