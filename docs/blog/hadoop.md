@@ -96,3 +96,94 @@ vim /opt/module/hadoop-3.1.3/etc/hadoop/hadoop-env.sh
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64
 export HADOOP_HOME=/opt/module/hadoop-3.1.3
 ```
+
+正确显示
+```
+$ hadoop version
+Hadoop 3.1.3
+Source code repository https://gitbox.apache.org/repos/asf/hadoop.git -r ba631c436b806728f8ec2f54ab1e289526c90579
+Compiled by ztang on 2019-09-12T02:47Z
+Compiled with protoc 2.5.0
+From source with checksum ec785077c385118ac91aadde5ec9799
+This command was run using /opt/module/hadoop-3.1.3/share/hadoop/common/hadoop-common-3.1.3.jar
+```
+
+集群分发脚本xsync
+
+需要对应用户名ssh可通
+
+scp (secure copy) 实现服务器间copy数据
+
+```shell
+scp -r <sourceFile> <targetfile>
+
+# -r: 递归
+# <source|target>: 格式 <user@><host>:<目录>/<文件>
+```
+
+rsync 用于备份和镜像，相较于scp，scp是复制所以文件，rsync复制差异文件
+
+```shell
+rsync -ar <$pdir/$filename> <targetfile>
+
+# -a: 归档拷贝
+# -v: 显示过程
+# <target>: 格式 <$user@><$host>:<$pdir>/<$fname>
+```
+如将hadoop复制到hadoop002`rsync -av hadoop-3.1.3/ shadoop@hadoop002:/opt/module/hadoop-3.1.3/
+`
+
+编写脚本，`${HOME}/bin`目录下`vim xsync` 
+```shell
+#!/bin/bash
+#1. 判断参数个数
+if [ $# -lt 1 ]
+then
+    echo Not Enough Arguement!
+    exit;
+fi
+#2. 遍历集群所有机器
+for host in hadoop001 hadoop002 hadoop003
+do
+    echo ==================== $host ====================
+    #3. 遍历所有目录，挨个发送
+    for file in $@
+    do
+        #4. 判断文件是否存在
+        if [ -e $file ]
+        then
+            #5. 获取父目录
+            pdir=$(cd -P $(dirname $file); pwd)
+            #6. 获取当前文件的名称
+            fname=$(basename $file)
+            ssh $host "mkdir -p $pdir"
+            rsync -av $pdir/$fname $host:$pdir
+        else
+            echo $file does not exists!
+        fi
+    done
+done
+```
+修改执行权限`chmod +x xsync`  
+测试脚本 `./xsync /home/shadoop/bin/`
+
+将脚本复制到`/bin/`中，方便全局调用`sudo cp xsync /bin/`  
+
+前面已复制hadoop到其他服务器中，若没复制`xsync /opt/module/hadoop-3.1.3`  
+复制配置到其他服务器`xsync /etc/profile.d/my_env.sh`  
+去其他服务器中，使配置生效`source /etc/profile.d/my_env.sh`  
+
+保证所有服务器都有hadoop环境
+
+
+
+|      |   hadoop001   |   hadoop002   |   hadoop003   |
+| ---- | ---- | ---- | ---- |
+|   HDFS   |   <p style="color: red;">NameNode</p>DataNode   |   DataNode   |   <p style="color: red;">SecondaryNameNode</p>DataNode   |
+|   YARN   |   NodeManager   |   <p style="color: red;">ResourceManager</p>NodeManager   |   NodeManager   |
+
+> - NameNode 和 SecondaryNameNode 不要安装在同一台服务器  
+> - ResourceManager 也很消耗内存，不要和 NameNode、SecondaryNameNode 配置在
+> 同一台机器上。
+
+
