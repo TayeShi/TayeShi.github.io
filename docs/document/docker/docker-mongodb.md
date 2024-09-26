@@ -5,7 +5,7 @@
 ### 拉取镜像
 
 ```
-docker pull mongodb
+docker pull mongo
 ```
 
 ### 启动
