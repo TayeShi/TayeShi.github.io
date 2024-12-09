@@ -21,8 +21,11 @@ export default defineConfig({
       // { text: 'Examples', link: '/markdown-examples' },
       { text: 'Document', link: '/document/' },
       { text: 'Interview', link: '/interview/' },
-      { text: 'Blog', link: '/blog/'}
-
+      { text: 'Blog', link: '/blog/'},
+      {
+        text: 'awesome',
+        link: '/awesome/'
+      }
     ],
 
     // sidebar: {
