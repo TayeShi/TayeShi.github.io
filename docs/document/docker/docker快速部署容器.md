@@ -1,8 +1,67 @@
-# docker-minio
+# Docker 快速部署容器
+
+## Docker 部署 Mysql
+
+```shell
+docker pull mysql:latest
+```
+
+```shell
+docker run -itd --name local-mysql --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+```
+
+- `-p`: 指定容器端口映射到主机端口
+- `--name`: 指定运行容器名
+- `-e`: 设置环境变量。
+  - `MYSQL_ROOT_PASSWORD=123456`设置 mysql 服务 root 用户密码 123456
+- `--restart=always`: 当Docker守护进程启动时，这个设置确保即使容器停止，它也会自动重启。
+
+- `-v <宿主机文件夹路径，如：/**/mysql>:/var/lib/mysql`: 将宿主机上的目录`/**/mysql`映射到容器内的`/var/lib/mysql`目录。这样可以将数据持久化存储在宿主机上，避免容器重启或销毁时丢失数据。
+- `-d`: 这个标志表示容器应该以后台（守护进程）模式运行，不会阻塞终端。
+
+`docker run -itd --name local-mysql --restart=always -v /home/docker/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql`
+
+## Docker 部署 Mongodb
+
+```
+docker pull mongo
+```
+
+```
+docker run -itd --name local-mongo -p 27017:27017 mongo <-auth>
+```
+
+**指定版本**
+
+`docker pull mongo:4.2.24`
+
+`docker run -itd --name mongo-4.2.24 -p 27017:27017 mongo:4.2.24`
+
+
+## Docker 部署 Redis
+
+```shell
+docker pull redis:latest
+```
+
+```shell
+docker run -itd --name local-redis --restart=always -p 6379:6379 redis
+```
+
+- `-p`: 指定容器端口映射到主机端口
+- `--name`: 指定运行容器名
+
+**进入运行的 Redis 服务**
+
+```shell
+docker exec -it local-redis /bin/bash
+```
+
+## Docker 部署 Minio
 
 `docker pull minio/minio`
 
-linux
+**linux**
 
 ```shell
 docker run \
@@ -17,7 +76,7 @@ docker run \
 minio/minio server /data --console-address ":9001"
 ```
 
-windows
+**windows**
 
 ```
 docker run \
