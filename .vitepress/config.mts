@@ -47,7 +47,8 @@ export default defineConfig({
               items: [
                 { text: 'Docker快速部署容器', link: '/docker快速部署容器'}
               ]
-            }
+            },
+            { text: 'Typescript', link: '/typescript' },
           ]
         }
       ],
