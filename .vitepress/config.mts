@@ -49,6 +49,7 @@ export default defineConfig({
               ]
             },
             { text: 'Typescript', link: '/typescript' },
+            { text: '数学', link: '/数学' },
           ]
         }
       ],
