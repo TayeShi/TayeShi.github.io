@@ -60,3 +60,19 @@ const userWithoutGender: UserWithoutGender = {
     age: 25,
 };
 ```
+
+## `tsconfig.json`
+https://json.schemastore.org/tsconfig
+
+### `compilerOptions`
+指定TypeScript编译器如何编译你的项目
+
+#### `module`
+指定编译后的模块标准, 除了下面的，还包括`None`, `Node16`, `NodeNext`, `Preserve`
+
+- `CommonJS`: 编译成`require()`、`module.exports`的格式
+- `ESNext`: 使用最新的JavaScript模块标准（即ECMAScript模块）
+- `ES2015/ES6/ES2020/ES2022`: 指定版本的ES
+- `UMD(Universal Module Definition)`: 一种试图支持所有模块定义API的模式。它可以在AMD、CommonJS和全局变量定义之间自动切换，这使得它非常适合编写既能在浏览器环境中又能在服务器端运行的库
+- `AMD(Asynchronous Module Definition)`: 主要用于浏览器环境，允许模块和依赖异步加载。完全基于浏览器的应用，并且你不想用打包工具，可以使用
+- `System`: 一种动态模块加载器，可以加载各种格式的模块（包括ES模块、CommonJS和AMD），适用于开发阶段，因为它允许你以不同的模块格式混合使用代码
