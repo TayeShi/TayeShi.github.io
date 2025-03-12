@@ -110,3 +110,22 @@ minio/minio server /data --console-address ":9001"
 `server /data --console-address ":9001"`: 这是运行MinIO服务器的命令，`server /data`表示使用`/data`目录作为数据存储路径，`--console-address ":9001"`则指定了Web控制台的监听地址为容器内部的9001端口。
 
 浏览器访问：http://IP:9001/minio/login，登录使用自定义账户密码admin/admin123456登录
+
+## Docker 部署 consul
+
+### 单节点部署
+
+```
+# 启动一个开发模式的 Consul 容器
+docker run -d \
+  --name consul \
+  -p 8500:8500 \
+  -p 8600:8600/udp \
+  hashicorp/consul \
+  agent -server -ui -node=node1 -bootstrap-expect=1 -client=0.0.0.0
+```
+
+- `-p 8500:8500`: HTTP API 和 Web UI
+- `-p 8600:8600/udp`: DNS 接口
+
+https://developer.hashicorp.com/consul/tutorials/archive/docker-container-agents#configure-and-run-a-consul-server
