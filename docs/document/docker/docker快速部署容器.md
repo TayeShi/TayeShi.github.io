@@ -116,16 +116,26 @@ minio/minio server /data --console-address ":9001"
 ### 单节点部署
 
 ```
+# 创建数据卷
+docker volume create consul-data
 # 启动一个开发模式的 Consul 容器
 docker run -d \
   --name consul \
   -p 8500:8500 \
   -p 8600:8600/udp \
+  -v /home/docker/consul/config:/consul/config \
+  -v consul-data:/consul/data \
   hashicorp/consul \
   agent -server -ui -node=node1 -bootstrap-expect=1 -client=0.0.0.0
+  -config-dir=/consul/config
+  -data-dir=/consul/data
 ```
 
 - `-p 8500:8500`: HTTP API 和 Web UI
 - `-p 8600:8600/udp`: DNS 接口
+- `-v /home/docker/consul/config:/consul/config`: 挂载配置目录
+- `-v consul-data:/consul/data`: 挂载数据目录仍用 Volume
+- `-config-dir=/consul/config`: 指定配置目录
+- `-data-dir=/consul/data`: 指定数据目录
 
 https://developer.hashicorp.com/consul/tutorials/archive/docker-container-agents#configure-and-run-a-consul-server
