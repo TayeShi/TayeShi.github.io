@@ -126,8 +126,8 @@ docker run -d \
   -v /home/docker/consul/config:/consul/config \
   -v consul-data:/consul/data \
   hashicorp/consul \
-  agent -server -ui -node=node1 -bootstrap-expect=1 -client=0.0.0.0
-  -config-dir=/consul/config
+  agent -server -ui -node=node1 -bootstrap-expect=1 -client=0.0.0.0 \
+  -config-dir=/consul/config \
   -data-dir=/consul/data
 ```
 
@@ -139,3 +139,83 @@ docker run -d \
 - `-data-dir=/consul/data`: 指定数据目录
 
 https://developer.hashicorp.com/consul/tutorials/archive/docker-container-agents#configure-and-run-a-consul-server
+
+### consul操作
+
+#### docker启动完整单节点consul
+
+##### 1. 配置acl.hcl
+
+宿主机/home/docker/consul/config/acl.hcl
+
+```
+acl = {
+  enabled = true
+  default_policy = "deny"
+  enable_token_persistence = true
+}
+```
+
+##### 2. 启动 创建卷，启动docker
+
+```shell
+# 创建数据卷
+docker volume create consul-data
+# 启动一个开发模式的 Consul 容器
+docker run -d \
+  --name consul \
+  -p 8500:8500 \
+  -p 8600:8600/udp \
+  -v /home/docker/consul/config:/consul/config \
+  -v consul-data:/consul/data \
+  hashicorp/consul \
+  agent -server -ui -node=node1 -bootstrap-expect=1 -client=0.0.0.0 \
+  -config-dir=/consul/config \
+  -data-dir=/consul/data
+```
+
+##### 3. 生成token
+
+启动后, `docker exec consul consul acl bootstrap` 命令生成 Bootstrap Token（超级管理员权限）
+
+输出example:
+
+```
+AccessorID:   d4a0d9a5-3f3a-4f5a-90d1-2d8b7d3e3f3a
+SecretID:     e1d8c4d7-1c1a-4e2a-9d3b-8c7d6e5f4a3b
+Description:  Bootstrap Token (Global Management)
+Local:        false
+Create Time:  2023-10-01 12:00:00 +0000 UTC
+Policies:
+  00000000-0000-0000-0000-000000000001 - global-management
+```
+
+##### 4. 创建operate.hcl
+
+/home/docker/consul/config/admin-operate.hcl
+
+```
+node_prefix "" {
+  policy = "write"  # 允许节点注册、更新、删除
+}
+service_prefix "" {
+  policy = "write"  # 允许服务注册、更新、删除
+}
+key_prefix "" {
+  policy = "write"  # 允许所有 KV 操作
+}
+operator = "write"  # 允许运维操作（如节点维护）
+```
+
+##### 5. 使用 Bootstrap Token 创建策略
+
+```shell
+sudo docker exec consul consul acl policy create \
+  -name "admin-operate-policy" \
+  -description "允许节点和服务的完全操作权限" \
+  -rules @/consul/config/admin-operate.hcl \
+  -token <bootstrap token>
+```
+
+就可以使用token登录了
+
