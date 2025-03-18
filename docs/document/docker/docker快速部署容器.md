@@ -37,6 +37,37 @@ docker run -itd --name local-mongo -p 27017:27017 mongo <-auth>
 
 `docker run -itd --name mongo-4.2.24 -p 27017:27017 mongo:4.2.24`
 
+### 单节点部署mongo
+
+写入初始mongod.conf（`/home/docker/mongo/config/mongod.conf`）
+
+```
+# 允许外网访问
+net:
+  bindIp: 0.0.0.0
+  port: 27017
+```
+
+
+
+```
+sudo docker volume create mongo-data
+
+docker run -d \
+  --name mymongo \
+  -v mongo-data:/data/db \
+  -v /home/docker/mongo/config:/etc/mongo \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=123456 \
+  mongo \
+  --config /etc/mongo/mongod.conf
+```
+
+
+
+
+
 
 ## Docker 部署 Redis
 
