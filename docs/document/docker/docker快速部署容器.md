@@ -106,6 +106,7 @@ sudo docker volume create redis-data
 # 启动docker
 sudo docker run -d \
   --privileged \
+  --network host \
   --name redis \
   -p 6379:6379 \
   -v /home/docker/redis/config:/etc/redis \
