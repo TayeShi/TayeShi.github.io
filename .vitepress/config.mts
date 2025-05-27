@@ -45,7 +45,14 @@ export default defineConfig({
               text: 'Docker',
               base: '/document/docker',
               items: [
-                { text: 'Docker快速部署容器', link: '/docker快速部署容器'}
+                { text: 'Docker快速部署容器', link: '/docker快速部署容器'},
+                {
+                  text: 'Docker实例',
+                  base: '/document/docker',
+                  items: [
+                    { text: 'Docker Redis', link: '/docker-redis'}
+                  ]
+                }
               ]
             },
             { text: 'Typescript', link: '/typescript' },
