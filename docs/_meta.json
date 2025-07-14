@@ -1,0 +1,17 @@
+[
+    {
+    "text": "首页",
+    "link": "/",
+    "activeMatch": "^/index"
+  },
+  {
+    "text": "文档",
+    "link": "/document",
+    "activeMatch": "^/document/index"
+  },
+  {
+    "text": "每日小记",
+    "link": "/daily",
+    "activeMatch": "^/daily/index"
+  }
+]
