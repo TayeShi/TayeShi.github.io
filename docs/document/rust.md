@@ -139,11 +139,21 @@ true & false，内存大小为1个字节。
 
 match & if let
 
+### trait
+
+#### marker trait
+
+##### Send
+
+标记类型可以安全地跨线程转移所有权
 
 
 
+#### dyn （Dynamic Dispatch）
 
-#### 关键字
+动态分发
+
+### 关键字
 
 #### pub
 
@@ -160,7 +170,11 @@ match & if let
 - Debug: #[derive(Debug)]: 支持debug时，自动输出内部值。
 - 
 
+### 语法例子
 
+pub trait DynStream: AsyncRead + AsyncWrite + Send + 'static {}
+
+这里表示 实现DynStream的类型必须同时实现 `AsyncRead`、`AsyncWrite`、`Send` 这三个 trait，并且还必须满足 `'static` 生命周期约束。
 
 
 
