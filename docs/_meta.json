@@ -1,5 +1,5 @@
 [
-    {
+  {
     "text": "首页",
     "link": "/",
     "activeMatch": "^/index"
@@ -8,6 +8,11 @@
     "text": "文档",
     "link": "/document",
     "activeMatch": "^/document/index"
+  },
+  {
+    "text": "Rust",
+    "link": "/rust",
+    "activeMatch": "^/rust/index"
   },
   {
     "text": "每日小记",
