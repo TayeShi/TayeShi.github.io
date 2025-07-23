@@ -1,6 +1,11 @@
 # daily
 
 
+### 2025-07-21
+
+rust中Cow，eg:
+`pub tags: HashMap<Cow<'static, str>, Cow<'static, str>>,`
+
 
 ### 2025-07-17
 
