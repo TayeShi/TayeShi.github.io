@@ -23,9 +23,20 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+## 启动实例
 
+### postgres
 
+```shell
+docker run --name local-postgres \
+  -e POSTGRES_PASSWORD=local123456 \
+  -e POSTGRES_USER=local \
+  -e POSTGRES_DB=local_dev \
+  -p 5432:5432 \
+  -d postgres:15
+```
 
+参考https://hub.docker.com/_/postgres
 
 
 
