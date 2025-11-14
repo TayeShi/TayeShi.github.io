@@ -16,6 +16,7 @@ conda activate myenv
 conda env: env相关
 
 ```
+conda install jupyter
 
 # 基本启动
 jupyter notebook
