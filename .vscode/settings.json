@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+  "[javascript][typescript][tsx][jsx][json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "files.associations": {
+    "*.js": "javascript",
+    "*.ts": "typescript",
+    "*.jsx": "javascriptreact",
+    "*.tsx": "typescriptreact"
+  }
+}
